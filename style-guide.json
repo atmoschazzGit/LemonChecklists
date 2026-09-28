@@ -202,7 +202,7 @@
     "doneState": "A checked step keeps its colors and drops to opacity .62; do not grey it to muted, or the torque chips inside lose contrast."
   },
   "guidePage": {
-    "reference": "guides/volvo-940-b230fd-head-gasket.html",
+    "reference": "https://github.com/Hellreaver/Lemon-Checklists/blob/main/guides/volvo-940-b230fd-head-gasket.html",
     "topbar": "sticky, bg, 3px accent bottom border; eyebrow (year, model, engine) then h1 accent-ink; 10px progress bar (track, accent fill) with mono done/total count",
     "jumpNav": "horizontal scroll row under the topbar; chips are card fill, 1px line, radius 8px, 15px Barlow Condensed uppercase, muted text; hover/focus accent",
     "sectionHeading": "h2 26px accent-ink, then a 40x3px accent rule, then a muted 15px sub line",

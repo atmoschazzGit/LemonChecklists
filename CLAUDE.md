@@ -7,14 +7,14 @@ Apply these rules whenever building or editing a Lemon procedure guide.
 ## Functional rules (workflow)
 
 - Guides are procedure checklists built from the **Lemon manuals MCP server** (`mcp__Lemon_Manuals__*`: browse, find, read_page, get_image). One self-contained HTML file per job under `guides/`, named `<make>-<model>-<engine>-<job>.html` (e.g. `volvo-940-b230fd-head-gasket.html`).
-- Follow `style-guide.json` for colors, type and components. `guides/volvo-940-b230fd-head-gasket.html` is the reference page; copy its structure, CSS and script.
+- Follow `style-guide.json` for colors, type and components. The reference page is Hellreaver's [volvo-940-b230fd-head-gasket.html](https://github.com/Hellreaver/Lemon-Checklists/blob/main/guides/volvo-940-b230fd-head-gasket.html) (not in this repo); copy its structure, CSS and script, or copy from an existing guide here once there is one.
 - **Confirm the exact year, model and engine code before writing.** Pull every spec from that vehicle's book, never from memory or a similar vehicle.
 - **Figures:** put the manual's own figures in wherever a step, sequence or spec table has one (bolt orders, timing marks, exploded views, scanned torque tables).
   - Fetch with MCP `get_image`. It shows the image to Claude but writes no file.
   - Save with `python3 tools/save-figures.py <guide-name> ID=name ...` (ID is the last segment of the image path, e.g. `364989686` from `/images/IMP68Q313/euro650/364989686/`; name has no extension). It pulls the image out of this session's transcript into `guides/img/<guide-name>/`.
   - Never download figures from the public LEMON site or any mirror; the container blocks it, and the connector is the source.
   - Link figures with relative paths.
-- List every new guide in `index.html` and `README.md` (README format: `- [<year> <make> <model> <engine> <job>](https://atmoschazzgit.github.io/LemonChecklists/guides/<file>.html) (\`guides/<file>.html\`)`).
+- List every new guide in `index.html` (as `<li><a class="guide" href="guides/<file>.html"><strong>Job</strong><span>year model &middot; engine</span></a></li>` inside a `<h2>Make Model</h2><ul>` group, replacing the "No guides yet" line) and `README.md` (README format: `- [<year> <make> <model> <engine> <job>](https://atmoschazzgit.github.io/LemonChecklists/guides/<file>.html) (\`guides/<file>.html\`)`).
 - The first link in every guide's jump nav is the `&larr; All guides` chip (`<a href="../index.html">&larr; All guides</a>`).
 - Push straight to `main` (GitHub Pages serves from it). **No attribution lines in commits** for that repo.
 - The repo is public: keep local paths, host names, ports and personal details out of committed files.

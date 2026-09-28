@@ -3,7 +3,7 @@ Lemon manuals checklists/htmls for procedures
 
 **Open the guides: [atmoschazzgit.github.io/LemonChecklists](https://atmoschazzgit.github.io/LemonChecklists/)**
 
-- [1994 Volvo 940 B230FD head gasket replacement](https://atmoschazzgit.github.io/LemonChecklists/guides/volvo-940-b230fd-head-gasket.html) (`guides/volvo-940-b230fd-head-gasket.html`)
+No guides yet.
 
 Other files:
 
