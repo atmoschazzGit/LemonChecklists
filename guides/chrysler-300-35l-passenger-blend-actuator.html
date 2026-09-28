@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1B1917">
+<title>300 Passenger Blend Actuator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Tokens from style-guide.json. Always dark; no light theme. */
+:root{
+  --bg:#1B1917; --card:#232019; --text:#ECE8E0; --muted:#B6AFA0;
+  --line:#3A362F; --field:#1B1917;
+  --accent:#7BAFA9; --accent-soft:#243B37; --accent-ink:#BFE0DA; --on-accent:#13201E;
+  --good:#7BAFA9; --good-bg:#243B37;
+  --warn:#D9A95B; --warn-bg:#3A2F1C;
+  --bad:#D97A7A; --bad-bg:#3B2323;
+  --idle-bg:#2C2923; --track:#3A362F; --plate:#FFFFFF;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;background:var(--bg);color:var(--text);
+  font:16px/1.5 "Barlow",system-ui,Arial,sans-serif;-webkit-text-size-adjust:100%;}
+h1,h2,h3,.eyebrow,nav.jump a,th{font-family:"Barlow Condensed","Arial Narrow",sans-serif;}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px calc(48px + env(safe-area-inset-bottom));}
+
+.topbar{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:3px solid var(--accent);}
+.topbar-inner{max-width:720px;margin:0 auto;padding:calc(12px + env(safe-area-inset-top)) 16px 4px;}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0;}
+.topbar h1{font-size:24px;font-weight:700;letter-spacing:.01em;line-height:1.1;color:var(--accent-ink);margin:2px 0 0;}
+.progress{display:flex;align-items:center;gap:10px;margin:8px 0 0;}
+.bar{flex:1;height:10px;border-radius:5px;background:var(--track);overflow:hidden;}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s;}
+.count{font:600 12px "IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap;}
+nav.jump{display:flex;gap:6px;overflow-x:auto;padding:8px 16px 10px;max-width:720px;margin:0 auto;scrollbar-width:none;}
+nav.jump::-webkit-scrollbar{display:none;}
+nav.jump a{flex:0 0 auto;font-size:15px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:8px;
+  padding:8px 12px;line-height:1;display:flex;align-items:center;min-height:36px;}
+nav.jump a:hover{border-color:var(--accent);color:var(--accent);}
+nav.jump a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+
+section{padding-top:32px;scroll-margin-top:150px;}
+h2{font-size:26px;font-weight:700;line-height:1.1;color:var(--accent-ink);margin:0;text-wrap:balance;}
+h3{font-size:19px;font-weight:700;color:var(--accent-ink);margin:26px 0 8px;}
+.rule{height:3px;background:var(--accent);width:40px;margin:8px 0 12px;border-radius:2px;}
+.sub{color:var(--muted);font-size:15px;margin:4px 0 14px;}
+p{margin:0 0 12px;}
+strong{color:var(--text);font-weight:700;}
+
+ol.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;}
+.step{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--line);border-radius:10px;
+  padding:12px 14px;display:grid;grid-template-columns:28px 1fr;gap:10px;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;transition:border-color .15s,opacity .15s;}
+.step .n{font:600 13px "IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;color:var(--muted);
+  width:26px;height:26px;border:1px solid var(--line);border-radius:999px;display:flex;align-items:center;justify-content:center;}
+.step p{margin:0;font-size:16px;}
+.step p + p{margin-top:6px;}
+.step.done{border-left-color:var(--good);opacity:.62;}
+.step.done .n{background:var(--good-bg);border-color:var(--good);color:var(--good);}
+.step:focus-visible{outline:2px solid var(--accent);outline-offset:-1px;}
+
+.torq{font:600 .92em "IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;
+  color:var(--accent-ink);background:var(--accent-soft);padding:1px 6px;border-radius:6px;white-space:nowrap;}
+.num{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;}
+code{font:500 .9em "IBM Plex Mono",monospace;background:var(--idle-bg);padding:1px 5px;border-radius:6px;}
+
+.callout{border-radius:8px;padding:10px 12px;margin:14px 0 0;font-size:15px;border-left:4px solid;}
+.callout .tag{display:block;font:700 12px "Barlow Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;}
+.callout p{margin:0;} .callout p + p{margin-top:8px;}
+.c-warn{background:var(--warn-bg);border-color:var(--warn);} .c-warn .tag{color:var(--warn);}
+.c-note{background:var(--accent-soft);border-color:var(--accent);} .c-note .tag{color:var(--accent-ink);}
+.c-bad{background:var(--bad-bg);border-color:var(--bad);} .c-bad .tag{color:var(--bad);}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--card);margin-top:10px;}
+table{border-collapse:collapse;width:100%;font-size:14px;}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;}
+th{font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+td{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;}
+td:first-child{font-family:"Barlow",sans-serif;}
+td:last-child{white-space:nowrap;}
+td em{font-style:normal;color:var(--muted);font-size:12px;display:block;}
+tbody tr:last-child td{border-bottom:none;}
+table.words td{font-family:"Barlow",sans-serif;white-space:normal;}
+
+.seq{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px;}
+.seq > figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;}
+.seq > figure > figcaption{font:700 13px "Barlow Condensed",sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;border:1px dashed var(--line);border-radius:8px;padding:8px;}
+.grid5 span{font:600 14px "IBM Plex Mono",monospace;text-align:center;padding:6px 0;border-radius:999px;background:var(--idle-bg);color:var(--text);}
+.grid5 span.first{background:var(--accent-soft);color:var(--accent-ink);}
+.seq .hint{font-size:12px;color:var(--muted);margin:6px 0 0;}
+@media (max-width:420px){.seq{grid-template-columns:1fr;}}
+.fig{margin:10px 0 0;}
+.fig .plate{display:block;background:var(--plate);border-radius:8px;padding:8px;}
+.fig img{display:block;max-width:100%;height:auto;margin:0 auto;}
+.fig figcaption{font-size:12px;line-height:1.35;color:var(--muted);margin-top:5px;}
+.callout .fig{margin-top:10px;}
+
+.reset{font:inherit;font-size:13px;background:none;border:0;color:var(--accent);text-decoration:underline;padding:0;cursor:pointer;margin-top:10px;}
+.foot{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <p class="eyebrow">2007 Chrysler 300 &middot; 3.5L V6 VIN G &middot; from the shop manual</p>
+    <h1>Passenger side blend door actuator</h1>
+    <div class="progress" aria-live="polite"><div class="bar"><i id="fill"></i></div><span class="count" id="count">0 / 0</span></div>
+  </div>
+  <nav class="jump">
+    <a href="../index.html">&larr; All guides</a>
+    <a href="#diagnose">Which actuator</a>
+    <a href="#removal">Removal</a>
+    <a href="#install">Install</a>
+    <a href="#finish">Calibrate</a>
+    <a href="#specs">Specs</a>
+  </nav>
+</header>
+
+<div class="wrap">
+
+<section id="scope" style="padding-top:18px;">
+  <div class="callout c-warn">
+    <span class="tag">Check your car first</span>
+    <p>Written from the <strong>3.5L V6 (VIN G)</strong> book. The passenger actuator only exists on cars with <strong>automatic dual-zone climate control (ATC)</strong>: two temperature knobs and an AUTO setting. Single-zone manual (MTC) cars have one blend actuator, on the driver side.</p>
+    <figure class="fig"><a class="plate" href="img/chrysler-300-35l-passenger-blend-actuator/atc-control.jpg"><img src="img/chrysler-300-35l-passenger-blend-actuator/atc-control.jpg" width="495" height="423" loading="lazy" alt="ATC dual zone control: fan knob 8, two temperature knobs 7 marked 66 to 78, mode knob 6, A/C, rear defrost and recirculation buttons"></a><figcaption>Manual figure: ATC dual zone A/C-heater control. 7 is the pair of driver and passenger temperature knobs.</figcaption></figure>
+  </div>
+  <div class="callout c-bad">
+    <span class="tag">Airbag warning</span>
+    <p>This is instrument panel work. Disconnect and isolate the battery negative cable, then <strong>wait 2 minutes</strong> for the airbag capacitor to discharge before you start. On the 300 the battery is in the trunk; see the <a href="chrysler-300-35l-battery.html#removal" style="color:var(--accent);">battery guide</a>.</p>
+  </div>
+  <p class="sub" style="margin-top:12px;">Book time is 0.4 h. The actuator can't be adjusted or repaired; the manual's fix is to replace it. Tap a step to check it off. Progress is saved in this browser only.</p>
+</section>
+
+<section id="diagnose">
+  <h2>Which actuator is it?</h2>
+  <div class="rule"></div>
+  <p class="sub">The HVAC box has four identical actuators. Only one is on the passenger side.</p>
+  <div class="tablewrap">
+    <table class="words">
+      <thead><tr><th>Symptom</th><th>Actuator</th></tr></thead>
+      <tbody>
+        <tr><td>Passenger vents blow the wrong temperature, or don't follow the right-hand temperature knob</td><td>Right blend door<em>behind glove box &middot; this guide</em></td></tr>
+        <tr><td>Driver vents blow the wrong temperature</td><td>Left blend door<em>driver side</em></td></tr>
+        <tr><td>Air comes out the wrong outlets (panel, floor, defrost) on both sides</td><td>Mode door<em>driver side &middot; 1.1 h</em></td></tr>
+        <tr><td>Recirculation doesn't switch</td><td>Recirculation door</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout c-note">
+    <span class="tag">Try calibration first</span>
+    <p>The control finds door positions by counting motor pulses, and errors build up over time. The scan tool's <strong>Actuator Calibration</strong> homes every actuator and clears those errors. It takes about <span class="num">90 s</span>. It's the only test that finds door-travel-too-large or too-small faults.</p>
+  </div>
+  <ol class="steps" style="margin-top:12px;">
+    <li class="step"><p>Read the HVAC codes with a scan tool <strong>before</strong> disconnecting the battery. Losing battery power clears all active codes.</p></li>
+    <li class="step"><p>Start the engine. Set the blower to manual low, both temperature knobs to full cold, mode to panel.</p></li>
+    <li class="step"><p>Turn the <strong>right</strong> (passenger) temperature knob to full hot, wait <span class="num">30 s</span>, then back to full cold. Watch the scan tool for active codes.</p></li>
+    <li class="step"><p>In the scan tool's HVAC System Tests, run <strong>Actuator Calibration Test</strong>, then view codes. If the passenger side now works and no codes set, stop here.</p></li>
+    <li class="step"><p>If codes point at the right blend door actuator or its circuit, check the harness and connector at the actuator for chafed wires and bent, pushed-out or corroded pins before you buy a part.</p></li>
+  </ol>
+</section>
+
+<section id="removal">
+  <h2>Removal</h2>
+  <div class="rule"></div>
+  <p class="sub">Glove box out, three screws, one connector.</p>
+  <ol class="steps">
+    <li class="step"><p>Disconnect and isolate the battery negative cable in the trunk. Wait <span class="num">2 min</span> before touching the instrument panel.</p></li>
+    <li class="step"><p>Open the glove box. Push in on both sides of the bin to clear the stops (2) and let it drop.</p><figure class="fig"><a class="plate" href="img/chrysler-300-35l-passenger-blend-actuator/glove-box-stops.jpg"><img src="img/chrysler-300-35l-passenger-blend-actuator/glove-box-stops.jpg" width="495" height="424" loading="lazy" alt="Glove box bin 1 with stop 2, bin hinge hook 3 and instrument panel hinge bracket 4"></a><figcaption>Manual figure: Glove box removal. 1 bin, 2 stop, 3 bin hinge hook, 4 panel hinge bracket.</figcaption></figure></li>
+    <li class="step"><p>Pivot the bin down and unhook the hinge hooks (3) from the hinge brackets (4) at each end.</p></li>
+    <li class="step"><p>Turn the bin sideways and take the support strap and retainer (2) off its outboard end.</p><figure class="fig"><a class="plate" href="img/chrysler-300-35l-passenger-blend-actuator/glove-box-strap.jpg"><img src="img/chrysler-300-35l-passenger-blend-actuator/glove-box-strap.jpg" width="495" height="424" loading="lazy" alt="Glove box bin 1 turned sideways, support strap retainer 2 at the outboard end"></a><figcaption>Manual figure: Glove box support strap and retainer</figcaption></figure></li>
+    <li class="step"><p>Lift the glove box out of the car.</p></li>
+    <li class="step"><p>Find the actuator (2) on the passenger side of the HVAC air distribution housing (3). Remove its three screws (1).</p><figure class="fig"><a class="plate" href="img/chrysler-300-35l-passenger-blend-actuator/passenger-actuator-screws.jpg"><img src="img/chrysler-300-35l-passenger-blend-actuator/passenger-actuator-screws.jpg" width="495" height="424" loading="lazy" alt="Passenger blend door actuator 2 on the HVAC housing 3, screws 1 and wire harness connector 4"></a><figcaption>Manual figure: Blend door actuator, dual zone passenger side. 1 screws, 2 actuator, 3 housing, 4 connector.</figcaption></figure></li>
+    <li class="step"><p>Pull the actuator off the housing, unplug the HVAC harness connector (4) and remove the actuator.</p></li>
+  </ol>
+</section>
+
+<section id="install">
+  <h2>Install</h2>
+  <div class="rule"></div>
+  <p class="sub">No indexing needed; the control calibrates the door electronically.</p>
+  <div class="callout c-note">
+    <span class="tag">Same part, four places</span>
+    <p>The blend, mode and recirculation actuators are interchangeable: same black housing, splined shaft (3), connector (2) and three mounting tabs (4).</p>
+    <figure class="fig"><a class="plate" href="img/chrysler-300-35l-passenger-blend-actuator/actuator.jpg"><img src="img/chrysler-300-35l-passenger-blend-actuator/actuator.jpg" width="917" height="917" loading="lazy" alt="Actuator 1 with connector receptacle 2, splined output shaft 3 and mounting tab 4"></a><figcaption>Manual figure: Blend door actuator. 1 actuator, 2 connector receptacle, 3 splined output shaft, 4 mounting tab.</figcaption></figure>
+  </div>
+  <ol class="steps" style="margin-top:12px;">
+    <li class="step"><p>Put the actuator (1) in place on the passenger side of the housing (2). Rotate it slightly if needed so the output shaft splines (3) line up with the blend door cam (4).</p><figure class="fig"><a class="plate" href="img/chrysler-300-35l-passenger-blend-actuator/passenger-actuator-splines.jpg"><img src="img/chrysler-300-35l-passenger-blend-actuator/passenger-actuator-splines.jpg" width="495" height="424" loading="lazy" alt="Actuator 1 offered up to housing 2, output shaft splines 3 aligning with blend door cam 4"></a><figcaption>Manual figure: Blend door actuator installation, dual zone passenger side. 3 output shaft, 4 blend door cam.</figcaption></figure></li>
+    <li class="step"><p>Fit the three screws. Tighten to <span class="torq">2 Nm (17 in-lb)</span>. They thread into plastic.</p></li>
+    <li class="step"><p>Plug in the HVAC harness connector.</p></li>
+    <li class="step"><p>Glove box: turn the bin sideways and fit the support strap and retainer to its outboard end.</p></li>
+    <li class="step"><p>Hook the bin hinge hooks onto the hinge brackets at each end and pivot the bin up.</p></li>
+    <li class="step"><p>Push in on both sides of the bin to get the stops past the panel, pivot it closed and shut it.</p></li>
+    <li class="step"><p>Reconnect the battery negative cable.</p></li>
+  </ol>
+</section>
+
+<section id="finish">
+  <h2>Calibrate and check</h2>
+  <div class="rule"></div>
+  <p class="sub">The control has to learn the new actuator's stop positions.</p>
+  <ol class="steps">
+    <li class="step"><p>Start the engine. With the scan tool, run <strong>System Tests &rarr; Actuator Calibration Test</strong>. It takes about <span class="num">90 s</span>; every door returns to its requested position when it's done.</p></li>
+    <li class="step"><p>View codes. Diagnose and repair any that set, then clear stored codes.</p></li>
+    <li class="step"><p>Turn the right temperature knob to full hot, then full cold, and feel the passenger vents follow.</p></li>
+    <li class="step"><p>Do the battery reconnection checks: calibrate the auto-up front windows, and the steering angle sensor if the car has ESP. See <a href="chrysler-300-35l-battery.html#finish" style="color:var(--accent);">After reconnecting</a> in the battery guide.</p></li>
+  </ol>
+</section>
+
+<section id="specs">
+  <h2>Specs</h2>
+  <div class="rule"></div>
+  <p class="sub">Everything in this guide in one place.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Item</th><th>Spec</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Blend door actuator screws</strong> <em>3 per actuator</em></td><td>2 Nm (17 in-lb)</td></tr>
+        <tr><td>Airbag capacitor discharge wait <em>after disconnecting battery negative</em></td><td>2 min</td></tr>
+        <tr><td>Actuator Calibration run time <em>scan tool, ATC</em></td><td>~90 s</td></tr>
+        <tr><td>Actuator supply</td><td>12 V DC, reversible</td></tr>
+        <tr><td>Book time <em>air blend actuator, replace</em></td><td>0.4 h</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <button class="reset" id="reset" type="button">Clear all checkmarks</button>
+</section>
+
+<p class="foot">Source: LEMON manual for the 2007 Chrysler 300 V6-3.5L VIN G, Repair and Diagnosis: Heating and Air Conditioning, Air Door Actuator / Motor (Blend Door Actuator and Mode Door Actuator description, operation, removal and installation), Control Assembly (Automatic Dual Zone), Heating-A/C System Diagnostics, HVAC System Test (ATC); Body and Frame, Instrument Panel Glove Box removal and installation; and Parts and Labor: Air Door Actuator / Motor Labor Times. Figures are the manual's own scans; tap one to open it full size.</p>
+
+</div>
+
+<script>
+(function(){
+  var KEY='chrysler-300-35l-passenger-blend-actuator';
+  var steps=[].slice.call(document.querySelectorAll('.step'));
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){}
+  function render(){
+    var n=steps.filter(function(s){return s.classList.contains('done');}).length;
+    document.getElementById('count').textContent=n+' / '+steps.length;
+    document.getElementById('fill').style.width=(steps.length?100*n/steps.length:0)+'%';
+  }
+  function save(){
+    var o={};steps.forEach(function(s,i){if(s.classList.contains('done'))o[i]=1;});
+    try{localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}
+  }
+  steps.forEach(function(s,i){
+    var n=document.createElement('span');n.className='n';n.textContent=[].indexOf.call(s.parentNode.children,s)+1;s.insertBefore(n,s.firstChild);
+    var body=document.createElement('div');
+    while(s.childNodes.length>1)body.appendChild(s.childNodes[1]);
+    s.appendChild(body);
+    s.tabIndex=0;s.setAttribute('role','checkbox');
+    if(saved[i])s.classList.add('done');
+    s.setAttribute('aria-checked',s.classList.contains('done'));
+    function toggle(){s.classList.toggle('done');s.setAttribute('aria-checked',s.classList.contains('done'));save();render();}
+    s.addEventListener('click',function(e){if(!e.target.closest('.fig'))toggle();});
+    s.addEventListener('keydown',function(e){if(e.key===' '||e.key==='Enter'){e.preventDefault();toggle();}});
+  });
+  document.getElementById('reset').addEventListener('click',function(){
+    steps.forEach(function(s){s.classList.remove('done');s.setAttribute('aria-checked','false');});save();render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>
