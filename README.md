@@ -3,7 +3,7 @@ Lemon manuals checklists/htmls for procedures
 
 **Open the guides: [atmoschazzgit.github.io/LemonChecklists](https://atmoschazzgit.github.io/LemonChecklists/)**
 
-No guides yet.
+- [2007 Chrysler 300 3.5L V6 (VIN G) battery replacement](https://atmoschazzgit.github.io/LemonChecklists/guides/chrysler-300-35l-battery.html) (`guides/chrysler-300-35l-battery.html`)
 
 Other files:
 
