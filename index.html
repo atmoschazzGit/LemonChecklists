@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1B1917">
+<title>Lemon Checklists</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Tokens from style-guide.json. Always dark; no light theme. */
+:root{
+  --bg:#1B1917; --card:#232019; --text:#ECE8E0; --muted:#B6AFA0;
+  --line:#3A362F; --accent:#7BAFA9; --accent-soft:#243B37; --accent-ink:#BFE0DA;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;background:var(--bg);color:var(--text);
+  font:16px/1.5 "Barlow",system-ui,Arial,sans-serif;-webkit-text-size-adjust:100%;}
+h1,h2,.eyebrow{font-family:"Barlow Condensed","Arial Narrow",sans-serif;}
+.topbar{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:3px solid var(--accent);}
+.topbar-inner{max-width:720px;margin:0 auto;padding:calc(12px + env(safe-area-inset-top)) 16px 10px;}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0;}
+h1{font-size:24px;font-weight:700;letter-spacing:.01em;line-height:1.1;color:var(--accent-ink);margin:2px 0 0;}
+.wrap{max-width:720px;margin:0 auto;padding:18px 16px calc(48px + env(safe-area-inset-bottom));}
+h2{font-size:20px;font-weight:700;color:var(--accent-ink);margin:22px 0 8px;}
+ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;}
+a.guide{display:block;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);
+  border-radius:10px;padding:12px 14px;color:var(--text);text-decoration:none;-webkit-tap-highlight-color:transparent;}
+a.guide:hover,a.guide:focus-visible{border-color:var(--accent);outline:none;}
+a.guide strong{display:block;font-size:17px;color:var(--accent-ink);}
+a.guide span{display:block;font-size:14px;color:var(--muted);margin-top:2px;}
+.foot{margin-top:32px;padding-top:12px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;}
+.foot a{color:var(--accent);}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <p class="eyebrow">Procedure guides from the LEMON shop manuals</p>
+    <h1>Lemon Checklists</h1>
+  </div>
+</header>
+<div class="wrap">
+  <h2>Volvo 940</h2>
+  <ul>
+    <li><a class="guide" href="guides/volvo-940-b230fd-head-gasket.html"><strong>Head gasket replacement</strong><span>1994 940 sedan &middot; B230FD 2.3L non-turbo</span></a></li>
+  </ul>
+  <p class="foot">Tap a guide to open it. Each guide saves its checkmarks in this browser only. Source files: <a href="https://github.com/atmoschazzGit/LemonChecklists">github.com/atmoschazzGit/LemonChecklists</a>.</p>
+</div>
+</body>
+</html>

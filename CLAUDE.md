@@ -1,7 +1,7 @@
 # Lemon-Checklists: working rules and house style
 
-Source: https://github.com/Hellreaver/Lemon-Checklists (its `CLAUDE.md` and `style-guide.json`).
-Site: https://hellreaver.github.io/Lemon-Checklists/
+Adapted from https://github.com/Hellreaver/Lemon-Checklists (its `CLAUDE.md` and `style-guide.json`).
+Site (once GitHub Pages is enabled on `main`): https://atmoschazzgit.github.io/LemonChecklists/
 Apply these rules whenever building or editing a Lemon procedure guide.
 
 ## Functional rules (workflow)
@@ -14,7 +14,7 @@ Apply these rules whenever building or editing a Lemon procedure guide.
   - Save with `python3 tools/save-figures.py <guide-name> ID=name ...` (ID is the last segment of the image path, e.g. `364989686` from `/images/IMP68Q313/euro650/364989686/`; name has no extension). It pulls the image out of this session's transcript into `guides/img/<guide-name>/`.
   - Never download figures from the public LEMON site or any mirror; the container blocks it, and the connector is the source.
   - Link figures with relative paths.
-- List every new guide in `index.html` and `README.md` (README format: `- [<year> <make> <model> <engine> <job>](https://hellreaver.github.io/Lemon-Checklists/guides/<file>.html) (\`guides/<file>.html\`)`).
+- List every new guide in `index.html` and `README.md` (README format: `- [<year> <make> <model> <engine> <job>](https://atmoschazzgit.github.io/LemonChecklists/guides/<file>.html) (\`guides/<file>.html\`)`).
 - The first link in every guide's jump nav is the `&larr; All guides` chip (`<a href="../index.html">&larr; All guides</a>`).
 - Push straight to `main` (GitHub Pages serves from it). **No attribution lines in commits** for that repo.
 - The repo is public: keep local paths, host names, ports and personal details out of committed files.

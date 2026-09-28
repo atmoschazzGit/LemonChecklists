@@ -1,0 +1,222 @@
+{
+  "name": "Lemon house style",
+  "notes": [
+    "Always dark; no light theme.",
+    "Used by every Lemon procedure guide in this repo. Guide-page rules are under guidePage.",
+    "Warm near-black background, muted teal accent, amber and brick-red for status.",
+    "Numbers always use the mono face with tabular figures so columns line up.",
+    "Inputs are 16px so iOS Safari doesn't zoom on focus.",
+    "Mobile first: 720px max content width, fixed bottom tab bar, safe-area insets."
+  ],
+  "color": {
+    "bg": {
+      "value": "#1B1917",
+      "use": "page background, sticky topbar, PWA theme/background color"
+    },
+    "card": {
+      "value": "#232019",
+      "use": "card and tab bar surface, default button fill"
+    },
+    "text": {
+      "value": "#ECE8E0",
+      "use": "primary text"
+    },
+    "muted": {
+      "value": "#B6AFA0",
+      "use": "labels, secondary text, inactive tabs, table heads"
+    },
+    "line": {
+      "value": "#3A362F",
+      "use": "borders, dividers, row separators"
+    },
+    "field": {
+      "value": "#1B1917",
+      "use": "input and preview-box background"
+    },
+    "accent": {
+      "value": "#7BAFA9",
+      "use": "primary buttons, active tab, focus ring, links, eyebrow text, progress fill when on track"
+    },
+    "accent-soft": {
+      "value": "#243B37",
+      "use": "tinted info panels, note callouts, torque/spec chips, selected row"
+    },
+    "accent-ink": {
+      "value": "#BFE0DA",
+      "use": "headings, big numbers, the app title, toast background, text on accent-soft"
+    },
+    "on-accent": {
+      "value": "#13201E",
+      "use": "text on accent-filled buttons"
+    },
+    "good": {
+      "value": "#7BAFA9",
+      "use": "positive status text, checked-off step border and number (same as accent)"
+    },
+    "good-bg": {
+      "value": "#243B37",
+      "use": "positive status chip background"
+    },
+    "warn": {
+      "value": "#D9A95B",
+      "use": "caution status text, caution callout border and tag"
+    },
+    "warn-bg": {
+      "value": "#3A2F1C",
+      "use": "caution chip/panel background"
+    },
+    "bad": {
+      "value": "#D97A7A",
+      "use": "negative status text, danger buttons, behind-pace progress fill, error toast, hard-limit callout border and tag"
+    },
+    "bad-bg": {
+      "value": "#3B2323",
+      "use": "negative chip background, danger button border"
+    },
+    "idle-bg": {
+      "value": "#2C2923",
+      "use": "neutral/no-target chip background, inline code, unhighlighted sequence cells"
+    },
+    "track": {
+      "value": "#3A362F",
+      "use": "progress bar track"
+    }
+  },
+  "status": {
+    "thrive": {
+      "fg": "good",
+      "bg": "good-bg",
+      "meaning": "at or above the stretch target"
+    },
+    "survive": {
+      "fg": "warn",
+      "bg": "warn-bg",
+      "meaning": "above minimum, below stretch"
+    },
+    "behind": {
+      "fg": "bad",
+      "bg": "bad-bg",
+      "meaning": "below minimum"
+    },
+    "idle": {
+      "fg": "muted",
+      "bg": "idle-bg",
+      "meaning": "no target / nothing yet"
+    }
+  },
+  "font": {
+    "import": "https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap",
+    "body": {
+      "family": "\"Barlow\", system-ui, Arial, sans-serif",
+      "size": "16px",
+      "lineHeight": 1.4,
+      "weights": [
+        400,
+        500,
+        600,
+        700
+      ]
+    },
+    "display": {
+      "family": "\"Barlow Condensed\", \"Arial Narrow\", sans-serif",
+      "weights": [
+        600,
+        700
+      ],
+      "use": "h1, h2, h3, eyebrow labels, tab bar, period navigator label"
+    },
+    "mono": {
+      "family": "\"IBM Plex Mono\", ui-monospace, monospace",
+      "weights": [
+        400,
+        500,
+        600
+      ],
+      "fontVariantNumeric": "tabular-nums",
+      "use": "every number: money, stats, big figures, chips, number/date/time inputs"
+    }
+  },
+  "typeScale": {
+    "hint": "11px, muted",
+    "tableHead": "11px, uppercase, letter-spacing .05em, muted",
+    "small": "12px",
+    "eyebrow": "12px, uppercase, letter-spacing .1em, weight 700, accent",
+    "chip": "12px, weight 600, mono",
+    "statKey": "12px, muted",
+    "label": "13px, muted",
+    "row": "14px",
+    "tab": "15px, uppercase, letter-spacing .06em",
+    "input": "16px",
+    "h3": "17px, accent-ink",
+    "periodLabel": "18px, weight 700, accent-ink",
+    "h2": "20px, accent-ink",
+    "statValue": "22px, weight 600, mono",
+    "h1": "24px, accent-ink, letter-spacing .01em",
+    "bigNumber": "34px, weight 600, line-height 1.1, mono, accent-ink"
+  },
+  "radius": {
+    "bar": "5px",
+    "row": "6px",
+    "control": "8px",
+    "card": "10px",
+    "pill": "999px"
+  },
+  "spacing": {
+    "pagePadding": "12px",
+    "cardPadding": "14px",
+    "cardGap": "12px",
+    "gridGap": "0 10px (form grids), 12px (stat/today grids)",
+    "controlPadding": "10px (inputs), 12px 14px (buttons)",
+    "rowPadding": "9px 0"
+  },
+  "layout": {
+    "maxContentWidth": "720px, centered",
+    "topbar": "sticky, bg background, 3px accent bottom border, padding calc(12px + safe-area-top) 16px 10px",
+    "tabbar": "fixed bottom, card background, 1px line top border, equal-width buttons, active = accent text + 3px inset top bar",
+    "bodyBottomPadding": "calc(66px + safe-area-bottom) to clear the tab bar",
+    "breakpoint": "max-width 340px collapses 3-column grids to 2"
+  },
+  "components": {
+    "card": "background card, 1px solid line, radius 10px, padding 14px, margin-bottom 12px",
+    "cardLive": "card with 5px solid accent left border (line color when idle)",
+    "button": "inherit font, radius 8px, 1px solid line, background card, text color, padding 12px 14px",
+    "buttonPrimary": "background + border accent, text on-accent, weight 700",
+    "buttonGhost": "transparent background",
+    "buttonDanger": "text bad, border bad-bg",
+    "buttonDisabled": "opacity .6",
+    "linkButton": "no background/border, accent text, 13px, underline",
+    "input": "16px, background field, 1px solid line, radius 8px, padding 10px, full width; focus = 2px solid accent outline, offset -1px",
+    "label": "column flex, gap 4px, 13px muted, margin-bottom 10px",
+    "chip": "inline-block pill, padding 3px 9px, 12px weight 600 mono, colors from status map",
+    "progressBar": "10px tall, radius 5px, track color; fill = bad when behind, accent when on track; optional 2px text-colored tick marking expected-by-today",
+    "dataRows": "CSS grid rows, 14px, 9px vertical padding, 1px line separators; header row 11px uppercase muted; today's row bold accent-ink; numbers right-aligned",
+    "infoPanel": "13px, padding 8px 10px, radius 8px, accent-soft background with accent-ink text (warn variant uses warn-bg/warn)",
+    "toast": "fixed bottom-center above tab bar, accent-ink background, bg-colored text, 14px weight 600, radius 8px, fades via opacity .2s; error variant bad background",
+    "selectedRow": "accent-soft background, radius 6px, bleeds 8px past the row edges"
+  },
+  "css": ":root {\n  --bg: #1B1917;\n  --card: #232019;\n  --text: #ECE8E0;\n  --muted: #B6AFA0;\n  --line: #3A362F;\n  --field: #1B1917;\n  --accent: #7BAFA9;\n  --accent-soft: #243B37;\n  --accent-ink: #BFE0DA;\n  --on-accent: #13201E;\n  --good: #7BAFA9;\n  --good-bg: #243B37;\n  --warn: #D9A95B;\n  --warn-bg: #3A2F1C;\n  --bad: #D97A7A;\n  --bad-bg: #3B2323;\n  --idle-bg: #2C2923;\n  --track: #3A362F;\n  color-scheme: dark;\n}\nhtml, body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.4 \"Barlow\", system-ui, Arial, sans-serif; }\nh1, h2, h3, .eyebrow { font-family: \"Barlow Condensed\", \"Arial Narrow\", sans-serif; }\n.mono, .num { font-family: \"IBM Plex Mono\", ui-monospace, monospace; font-variant-numeric: tabular-nums; }",
+  "colorRules": {
+    "noNewColors": "Guides use only the tokens above. The earlier guide's separate blue note color and olive accent are dropped; notes use accent-soft/accent, cautions use warn, hard limits use bad.",
+    "textOnTint": "Body text on any *-bg or accent-soft stays text; tags on accent-soft use accent-ink, not accent (8.5:1 vs 4.9:1).",
+    "contrast": "Checked pairs, WCAG ratio: text/warn-bg 10.7, warn/warn-bg 6.1, accent-ink/accent-soft 8.5, accent/accent-soft 4.9, bad/bad-bg 4.8, muted/card 7.5, accent/bg 7.1. All pass AA for normal text.",
+    "doneState": "A checked step keeps its colors and drops to opacity .62; do not grey it to muted, or the torque chips inside lose contrast."
+  },
+  "guidePage": {
+    "reference": "guides/volvo-940-b230fd-head-gasket.html",
+    "topbar": "sticky, bg, 3px accent bottom border; eyebrow (year, model, engine) then h1 accent-ink; 10px progress bar (track, accent fill) with mono done/total count",
+    "jumpNav": "horizontal scroll row under the topbar; chips are card fill, 1px line, radius 8px, 15px Barlow Condensed uppercase, muted text; hover/focus accent",
+    "sectionHeading": "h2 26px accent-ink, then a 40x3px accent rule, then a muted 15px sub line",
+    "step": "card fill, 1px line, 5px line-colored left border, radius 10px, padding 12px 14px; numbered pill in mono, numbering restarts per list; tap toggles done (good left border, good-bg number pill, opacity .62); state saved to localStorage only",
+    "torqueChip": "inline mono 600, accent-ink on accent-soft, radius 6px, never wraps; every number the reader sets a tool to",
+    "callouts": {
+      "warn": "warn-bg fill, 4px warn left border, warn tag; manual cautions and 'check your engine' notices",
+      "note": "accent-soft fill, 4px accent left border, accent-ink tag; context and side notes",
+      "bad": "bad-bg fill, 4px bad left border, bad tag; manual warnings and scrap/replace limits"
+    },
+    "specTable": "card fill inside a 1px line, radius 10px; Barlow Condensed uppercase muted head; first column Barlow, spec column mono tabular; qualifiers in 12px muted on their own line",
+    "figure": "manual scan on a white (#FFFFFF, --plate) block, radius 8px, padding 8px, image max-width 100% at natural size with width/height set and lazy loading; 12px muted caption under it naming the manual figure; sits inside the step it illustrates; the image links to the full-size file and tapping it does not toggle the step",
+    "sequenceDiagram": "bolt order drawn as a 5-column grid of mono pills on idle-bg, first bolt on accent-soft/accent-ink, dashed line outline; orientation matches the manual figure",
+    "footer": "13px muted, 1px line top border; names the LEMON manual year, model, engine and every section used",
+    "images": "Include the manual's figures wherever a step, sequence or spec table has one (bolt orders, timing marks, exploded views, scanned torque tables). Fetch with the Lemon MCP get_image tool, save with tools/save-figures.py under guides/img/<guide-name>/, reference with a relative path, give each a caption naming the manual figure, 100% max width on a white card so the black-on-white scans stay readable in the dark theme."
+  }
+}
